@@ -15,7 +15,7 @@ import { errorHandler } from './middlewares/error.middleware.js'
 const app = express()
 
 app.use(cors({
-    origin: "http://videotube-auor.onrender.com",
+    origin: "http://video-tube-tau.vercel.app/",
     credentials: true
 }))
 
