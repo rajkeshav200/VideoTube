@@ -18,6 +18,8 @@ import { useAuth } from "./hook/useAuth";
 import PlayListDetail from "./pages/playListDetail";
 import Subscriptionpage from "./pages/subscription";
 import ChangePassword from "./pages/changePassword";
+import EditVideo from "./pages/Editvideo";
+import EditPlaylist from "./pages/Editplaylist";
 
 
 function App() {
@@ -45,6 +47,8 @@ function App() {
         <Route path="/playlist/:playlistId" element={<PlayListDetail/>}/>
         <Route path="/subscription" element={<Subscriptionpage/>}/>
         <Route path="/change-password" element={<ChangePassword/>}/>
+        <Route path="/edit-video/:videoId" element={<EditVideo/>}/>
+        <Route path="/edit-playlist/:playlistId" element={<EditPlaylist/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -10,7 +10,7 @@ export default function Likedvideo() {
         api.get('/like/likeVideo')
             .then((res) => setLikes(res.data?.data) || [])
             .catch((err) => {
-                console.error(err);
+                console.log(err);
                 setLikes([]);
             })
             .finally(() => {
@@ -35,7 +35,7 @@ export default function Likedvideo() {
 
     return (
         <div>
-            <h2 className="text-xl font-bold mb-4">Liked Videos</h2>
+            <h2 className="text-xl font-bold mb-4">Liked Videos ({likes.length})</h2>
 
             <div className="grid grid-cols-4 gap-4">
                 {likes.map(v => (

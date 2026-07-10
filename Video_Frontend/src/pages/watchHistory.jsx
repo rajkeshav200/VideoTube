@@ -21,7 +21,7 @@ export default function Watchhistory() {
     if (videos.length === 0) return <h1>No watch History</h1>
     return (
         <div className="max-w-5xl mx-auto p-4">
-            <h2 className="text-xl font-semibold mb-4 text-zinc-800">
+            <h2 className="text-xl font-bold mb-4 text-zinc-800">
                 Watch History
             </h2>
 

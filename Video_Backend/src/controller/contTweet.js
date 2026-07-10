@@ -53,7 +53,7 @@ const updateTweet = asynchandler(async (req, res) => {
     if (!tweet) {
         throw new ApiError(404, "Tweet not found")
     }
-    if (tweet.owner.toString !== req.user._id.toString()) {
+    if (tweet.owner.toString() !== req.user._id.toString()) {
         throw new ApiError(403, "You are not allowed to update this tweet")
     }
 

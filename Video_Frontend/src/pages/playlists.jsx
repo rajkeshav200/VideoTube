@@ -97,14 +97,23 @@ export default function PlayList({ user }) {
                         </Link>
 
                         {/* Right: delete button */}
-                        <button
-                            onClick={() => deletePlaylist(p._id)}
-                            className="px-3 py-1 text-xs font-medium text-zinc-800 
-                           border border-black-400 rounded-md
-                           hover:bg-red-500 hover:text-white transition"
-                        >
-                            Delete
-                        </button>
+                        <div className="flex gap-2">
+                            <Link to={`/edit-playlist/${p._id}`}>
+                                <button
+                                    className="px-3 py-1 text-xs font-medium border rounded-md
+                       hover:bg-blue-500 hover:text-white transition"
+                                >
+                                    Edit
+                                </button>
+                            </Link>
+                            <button
+                                onClick={() => deletePlaylist(p._id)}
+                                className="px-3 py-1 text-xs font-medium border rounded-md
+                     hover:bg-red-500 hover:text-white transition"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

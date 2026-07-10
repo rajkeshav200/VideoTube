@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { useAuth } from "../hook/useAuth";
 import StatBox from "../components/statBox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Dashboardpage() {
+    const navigate = useNavigate();
     const [stats, setStats] = useState(null);
     const [videos, setVideos] = useState([]);
     const { user, loading } = useAuth();
@@ -89,7 +90,7 @@ export default function Dashboardpage() {
                             <div className="flex gap-2 pt-2">
                                 <button
                                     onClick={() => togglePublish(v._id)}
-                                    className={`flex-1 text-xs py-1.5 rounded
+                                    className={`cursor-pointer flex-1 text-xs py-1.5 rounded
                                         ${v.isPublished
                                             ? "bg-indigo-500"
                                             : "bg-teal-500"
@@ -100,10 +101,11 @@ export default function Dashboardpage() {
 
                                 <button
                                     onClick={() => deleteVideo(v._id)}
-                                    className="flex-1 text-xs py-1.5 rounded bg-rose-500 text-white"
+                                    className="cursor-pointer flex-1 text-xs py-1.5 rounded bg-rose-500 text-white"
                                 >
                                     Delete
                                 </button>
+                                <button onClick={() => navigate(`/edit-video/${v._id}`)} className="cursor-pointer flex-1 text-xs py-1.5 rounded bg-yellow-600 text-white text-center">Edit</button>
                             </div>
                         </div>
                     </div>

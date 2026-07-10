@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../hook/useAuth";
+import TweetsSection from "../components/Tweetsection";
 
 export default function Channel() {
     const {user} = useAuth()
@@ -10,7 +11,7 @@ export default function Channel() {
     const [tab, setTab] = useState("videos");
     const [videos, setVideo] = useState([])
     const [playlists, setPlaylists] = useState([]);
-    const [tweets, setTweets] = useState([]);
+    //const [tweets, setTweets] = useState([]);
     const [subscribers, setSubscribers] = useState([]);
 
     useEffect(() => {
@@ -36,10 +37,10 @@ export default function Channel() {
             api.get(`/playlist/user/${channel._id}`)
                 .then(res => setPlaylists(res.data.data))
         }
-        if (tab === "tweets") {
-            api.get(`/tweet/user/${channel._id}`)
-                .then(res => setTweets(res.data.data));
-        }
+        // if (tab === "tweets") {
+        //     api.get(`/tweet/user/${channel._id}`)
+        //         .then(res => setTweets(res.data.data));
+        // }
 
         if (tab === "subscribers") {
             api.get(`/subscription/c/${channel._id}`)
@@ -149,9 +150,7 @@ export default function Channel() {
             )}
             {tab === "tweets" && (
                 <div className="p-4">
-                    {tweets.map(t => (
-                        <p key={t._id}>{t.content}</p>
-                    ))}
+                    <TweetsSection channel={channel}/>
                 </div>
             )}
             {tab === "subscribers" && (

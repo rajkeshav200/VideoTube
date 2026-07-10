@@ -126,7 +126,6 @@ export default function Comment({ videoId }) {
                         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-800 text-white font-semibold uppercase">
                             {c.owner?.username?.[0]}
                         </div>
-
                         {/* Comment Content */}
                         <div className="flex-1">
                             <div className="flex items-center gap-2">
@@ -134,9 +133,7 @@ export default function Comment({ videoId }) {
                                     @{c.owner?.username}
                                 </span>
                             </div>
-
                             <p className="text-zinc-900 mt-1">{c.content}</p>
-
                             <div className="flex items-center gap-4 mt-2">
                                 {/* ❤️ LIKE BUTTON */}
                                 <button

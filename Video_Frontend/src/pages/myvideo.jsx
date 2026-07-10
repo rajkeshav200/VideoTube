@@ -34,13 +34,13 @@ export default function Myvideo() {
 
     return (
         <div>
-            <h1>All videos</h1>
+            <h1 className="text-2xl font-bold mb-3">All videos({videos.length})</h1>
             <div className="grid grid-cols-3 gap-1">
                 {videos.map(v => (
                     <div key={v._id}>
                         <img src={v.thumbnail} />
                         <p className="font-semibold">{v.title}</p>
-                        <p className="text-sm text-zinc-900">
+                        <p className="text-sm  text-zinc-900">
                             {v.views} views • {TimeAgo(v.createdAt)}
                         </p>
                     </div>

@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import api from "../api/axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hook/useAuth";
 
 
 export default function PlayListDetail() {
+    const {user} = useAuth();
     const { playlistId } = useParams()
     const [playlist, setPlaylist] = useState(null)
 
@@ -27,7 +29,9 @@ export default function PlayListDetail() {
         <div className="max-w-4xl mx-auto p-4">
             {/* Playlist Title */}
             <h2 className="text-2xl font-bold mb-6 border-b border-zinc-700 pb-2">
-                {playlist.name}
+                {playlist.name}({playlist.videos.length})
+                <br />
+                {playlist.description}
             </h2>
 
             {/* Videos List */}
@@ -56,12 +60,14 @@ export default function PlayListDetail() {
                         </Link>
 
                         {/* Remove Button */}
-                        <button
-                            onClick={() => removeVideo(v._id)}
-                            className="px-4 py-2 text-sm font-medium text-red-400 border border-red-400 rounded-md hover:bg-red-500 hover:text-white transition"
-                        >
-                            Remove
-                        </button>
+                        {user && (
+                            <button
+                                onClick={() => removeVideo(v._id)}
+                                className="px-4 py-2 text-sm font-medium text-red-400 border border-red-400 rounded-md hover:bg-red-500 hover:text-white transition"
+                            >
+                                Remove
+                            </button>
+                        )}
                     </div>
                 ))}
             </div>

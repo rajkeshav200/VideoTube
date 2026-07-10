@@ -168,12 +168,12 @@ const updateVideo = asynchandler(async (req, res) => {
     if (video.owner.toString() !== req.user._id.toString()) {
         throw new ApiError(403, "You are not allowed to update this video")
     }
-    if (title) Video.title = title
-    if (description) Video.description = description
+    if (title) video.title = title
+    if (description) video.description = description
 
-    if (req.files?.path) {
+    if (req.file?.path) {
         const uploadThumbnail = await uploadOnCloudinary(req.files.path)
-        if (uploadThumbnail?.url) Video.thumbnail = uploadThumbnail.url
+        if (uploadThumbnail?.url) video.thumbnail = uploadThumbnail.url
     }
 
     await video.save()
