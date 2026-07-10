@@ -20,35 +20,133 @@ import Subscriptionpage from "./pages/subscription";
 import ChangePassword from "./pages/changePassword";
 import EditVideo from "./pages/Editvideo";
 import EditPlaylist from "./pages/Editplaylist";
+import ProtectedRoute from "./components/protectedRoute";
 
 
 function App() {
 
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   //playlist from watchvideo
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Mainlayout />}>
-        <Route index element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="watch/:videoId" element={<Watch/>}/>
-        <Route path="/history" element={<Watchhistory/>}/>
-        <Route path="/channel/:username" element={<Channel/>}/>
-        <Route path="/dashboard" element={<Dashboardpage/>}/>
-        <Route path="/search" element={<Searchpage/>}/>
-        <Route path="/likedvideo" element={<Likedvideo/>}/>
-        <Route path="/me/videos" element={<Myvideo/>}/>
-        <Route path="/playlist" element={<PlayList user={user}/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/signup" element={<Register/>}/>
-        <Route path="/upload" element={<Upload/>}/>
-        <Route path="/playlist/:playlistId" element={<PlayListDetail/>}/>
-        <Route path="/subscription" element={<Subscriptionpage/>}/>
-        <Route path="/change-password" element={<ChangePassword/>}/>
-        <Route path="/edit-video/:videoId" element={<EditVideo/>}/>
-        <Route path="/edit-playlist/:playlistId" element={<EditPlaylist/>}/>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/watch/:videoId" element={<Watch />} />
+          <Route path="/channel/:username" element={<Channel />} />
+          <Route path="/search" element={<Searchpage />} />
+
+          {/* Protected Routes */}
+          <Route
+            path="/history"
+            element={
+              <ProtectedRoute>
+                <Watchhistory />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboardpage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/likedvideo"
+            element={
+              <ProtectedRoute>
+                <Likedvideo />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/me/videos"
+            element={
+              <ProtectedRoute>
+                <Myvideo />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/playlist"
+            element={
+              <ProtectedRoute>
+                <PlayList user={user} />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/playlist/:playlistId"
+            element={
+              <ProtectedRoute>
+                <PlayListDetail />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/upload"
+            element={
+              <ProtectedRoute>
+                <Upload />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/subscription"
+            element={
+              <ProtectedRoute>
+                <Subscriptionpage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/change-password"
+            element={
+              <ProtectedRoute>
+                <ChangePassword />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/edit-video/:videoId"
+            element={
+              <ProtectedRoute>
+                <EditVideo />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/edit-playlist/:playlistId"
+            element={
+              <ProtectedRoute>
+                <EditPlaylist />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

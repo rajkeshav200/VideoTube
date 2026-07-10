@@ -168,6 +168,9 @@ const login = asynchandler(async (req, res) => {
         throw new ApiError(401, "required fields")
     }
 
+    if (!password) {
+        throw new ApiError(400, "Password is required");
+    }
     const user = await User.findOne({
         $or: [{ username }, { email }]
     })

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../api/axios";
 import { useAuth } from "../hook/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { AuthContext } from "../context/authContext";
 
 export default function Register() {
     const [form, setForm] = useState({
@@ -16,6 +18,13 @@ export default function Register() {
     const { setUser } = useAuth()
     const navigate = useNavigate()
 
+    const {user} = useContext(AuthContext)
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [user, navigate]);
+    
     const setTexts = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }

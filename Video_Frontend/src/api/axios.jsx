@@ -9,7 +9,11 @@ api.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
 
-    if (originalRequest.url.includes("/user/refreshtoken")) {
+    if (
+      originalRequest.url.includes("/user/login") ||
+      originalRequest.url.includes("/user/register") ||
+      originalRequest.url.includes("/user/refreshtoken")
+    ) {
       return Promise.reject(error);
     }
 
