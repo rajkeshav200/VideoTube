@@ -13,6 +13,9 @@ export default function ChangePassword() {
       confirmnewPass:confirmpass
     });
     alert("Password updated");
+    setOldPass("")
+    setNewPass("")
+    setConfirmpass("")
   };
 
   return (

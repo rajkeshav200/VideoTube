@@ -37,8 +37,8 @@ export default function Comment({ videoId }) {
                         ...c,
                         isLiked: !c.isLiked,
                         likesCount: c.isLiked
-                            ? c.likesCount - 1
-                            : c.likesCount + 1
+                            ? (c.likesCount || 0) - 1
+                            : (c.likesCount || 0) + 1
                     }
                     : c
             )
@@ -56,8 +56,8 @@ export default function Comment({ videoId }) {
                             ...c,
                             isLiked: !c.isLiked,
                             likesCount: c.isLiked
-                                ? c.likesCount + 1
-                                : c.likesCount - 1
+                                ? (c.likesCount || 0) + 1
+                                : (c.likesCount || 0) - 1
                         }
                         : c
                 )
@@ -78,17 +78,17 @@ export default function Comment({ videoId }) {
         if (!edit.trim()) return
         try {
             const res = await api.patch(`/comment/c/${commentId}`, { content: edit })
-            setEdit(prev =>
-                prev._id === commentId ? {
-                    ...prev, content: res.data.data.content
-                } : prev,
+            // setEdit(prev =>
+            //     prev._id === commentId ? {
+            //         ...prev, content: res.data.data.content
+            //     } : prev,
 
-                setComment(prev => {
+                setComment(prev => 
                     prev.map(c => (
-                        c._id === commentId ? { ...c, content: edit } : c
+                        c._id === commentId ? { ...c, content: res.data.data.content } : c
                     ))
-                })
-            )
+                )
+            //)
             cancelEdit()
         } catch (error) {
             console.log(error)

@@ -3,6 +3,7 @@ import SubscribeBtn from "../components/subscribeBtn";
 import { useAuth } from "../hook/useAuth";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
+import { useRef } from "react";
 
 export default function Profile() {
     const { user, setUser } = useAuth();
@@ -10,27 +11,50 @@ export default function Profile() {
     const [email, setEmail] = useState("")
     const [avatar, setAvatar] = useState(null);
     const [cover, setCover] = useState(null);
+    const avatarRef = useRef(null);
+    const coverRef = useRef(null);
 
     const updateAccount = async () => {
-        await api.patch("/user/update-account", {
-            fullname,
-            email: email
-        })
-            .then(res => setUser(res.data.data))
-    }
+        try {
+            const res = await api.patch("/user/update-account", {
+                fullname,
+                email,
+            });
 
+            setUser(res.data.data);
+            setFullname("");
+            setEmail("");
+        } catch (err) {
+            console.error("Failed to update account:", err);
+        }
+    };
     const updateAvatar = async () => {
-        const formdata = new FormData();
-        formdata.append("avatar", avatar)
-        const res = await api.patch('/user/avatar', formdata);
-        setUser(res.data.data)
-    }
+        try {
+            if (!avatar) return;
 
+            const formData = new FormData();
+            formData.append("avatar", avatar);
+            const res = await api.patch("/user/avatar", formData);
+            setUser(res.data.data);
+            setAvatar(null);
+            avatarRef.current.value = "";
+        } catch (err) {
+            console.error("Failed to update avatar:", err);
+        }
+    };
     const updateCover = async () => {
-        const formData = new FormData();
-        formData.append("coverImage", cover);
-        const res = await api.patch("/user/coverImage", formData);
-        setUser(res.data.data);
+        try {
+            if (!cover) return;
+
+            const formData = new FormData();
+            formData.append("coverImage", cover);
+            const res = await api.patch("/user/coverImage", formData);
+            setUser(res.data.data);
+            setCover(null);
+            coverRef.current.value = "";
+        } catch (err) {
+            console.error("Failed to update cover image:", err);
+        }
     };
 
     if (!user) {
@@ -56,7 +80,7 @@ export default function Profile() {
     }
 
     return (
-        
+
         <div className="max-w-4xl mx-auto p-4 space-y-6">
             {/* Cover */}
             <img
@@ -96,12 +120,14 @@ export default function Profile() {
             <div className="grid sm:grid-cols-2 gap-4">
                 <label className="block text-sm mb-1">Avatar *</label>
                 <input
+                    ref={avatarRef}
                     type="file"
                     onChange={e => setAvatar(e.target.files[0])}
                     className="border rounded-lg p-2 cursor-pointer hover:border-indigo-500"
                 />
                 <label className="block text-sm mb-1">CoverImage</label>
                 <input
+                    ref={coverRef}
                     type="file"
                     onChange={e => setCover(e.target.files[0])}
                     className="border rounded-lg p-2 cursor-pointer hover:border-indigo-500"

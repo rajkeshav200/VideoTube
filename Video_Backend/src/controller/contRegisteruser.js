@@ -287,12 +287,13 @@ const changePassword = asynchandler(async (req, res) => {
         throw new ApiError(401, "Password Mismatch")
     }
     const user = await User.findById(req.user?._id)
-    const matchPassword = user.isPasswordCorrect(oldPassword)
+    const matchPassword = await user.isPasswordCorrect(oldPassword)
 
     if (!matchPassword) {
         throw new ApiError(401, "Wrong password")
     }
     user.password = newPassword
+    await user.save({ validateBeforeSave: false });
 
     res
         .status(200)
