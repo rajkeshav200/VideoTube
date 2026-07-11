@@ -13,7 +13,7 @@ export default function Profile() {
 
     const updateAccount = async () => {
         await api.patch("/user/update-account", {
-            fullName: fullname,
+            fullname,
             email: email
         })
             .then(res => setUser(res.data.data))
@@ -56,6 +56,7 @@ export default function Profile() {
     }
 
     return (
+        
         <div className="max-w-4xl mx-auto p-4 space-y-6">
             {/* Cover */}
             <img
@@ -70,7 +71,7 @@ export default function Profile() {
                     className="w-28 h-28 rounded-full border-4 border-white shadow"
                 />
                 <div>
-                    <h2 className="text-xl font-semibold">{user.fullName}</h2>
+                    <h2 className="text-xl font-semibold">{user.fullname}</h2>
                     <p className="text-gray-500">{user.email}</p>
                 </div>
             </div>
@@ -93,11 +94,13 @@ export default function Profile() {
 
             {/* File Inputs */}
             <div className="grid sm:grid-cols-2 gap-4">
+                <label className="block text-sm mb-1">Avatar *</label>
                 <input
                     type="file"
                     onChange={e => setAvatar(e.target.files[0])}
                     className="border rounded-lg p-2 cursor-pointer hover:border-indigo-500"
                 />
+                <label className="block text-sm mb-1">CoverImage</label>
                 <input
                     type="file"
                     onChange={e => setCover(e.target.files[0])}
