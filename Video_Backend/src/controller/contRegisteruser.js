@@ -258,8 +258,8 @@ const refreshAccessToken = asynchandler(async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: true,
+            sameSite: "none"
         }
 
         const { accessToken, refreshToken } = generateAccessAndRefreshToken(user._id)
