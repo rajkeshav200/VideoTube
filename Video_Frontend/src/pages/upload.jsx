@@ -46,10 +46,12 @@ export default function Upload() {
                 onChange={(e) => setDescription(e.target.value)}
             />
 
+            <label className="block text-sm mb-1">Video</label>
             <input className="border p-2 w-full mb-3"
                 type="file" placeholder="video"
                 onChange={(e) => setVideoFile(e.target.files[0])}
             />
+            <label className="block text-sm mb-1">Thumbnail</label>
             <input className="border p-2 w-full mb-3"
                 type="file" placeholder="thumbnail"
                 onChange={(e) => setThumbnail(e.target.files[0])}
