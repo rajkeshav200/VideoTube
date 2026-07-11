@@ -61,9 +61,12 @@ export default function Register() {
                     "Content-Type": "multipart/form-data"
                 }
             });
-
+            const loginRes = await api.post("/user/login", {
+                email: form.email,
+                password: form.password,
+            });
+            setUser(loginRes.data.data.loggedinUser);
             setSuccess(res.data.message);
-            setUser(res.data.data);
 
             setTimeout(() => {
                 navigate("/");
@@ -81,7 +84,7 @@ export default function Register() {
 
     console.log("error:", error);
     console.log("user:", user);
-    
+
     return (
         <div className="p-6 max-w-md mx-auto">
             <h2 className="text-xl mb-4">Sign Up</h2>
