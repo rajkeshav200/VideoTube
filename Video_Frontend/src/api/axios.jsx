@@ -12,7 +12,8 @@ api.interceptors.response.use(
     if (
       originalRequest.url.includes("/user/login") ||
       originalRequest.url.includes("/user/register") ||
-      originalRequest.url.includes("/user/refreshtoken")
+      originalRequest.url.includes("/user/refreshtoken")||
+      originalRequest.url.includes("/user/changepassword")
     ) {
       return Promise.reject(error);
     }

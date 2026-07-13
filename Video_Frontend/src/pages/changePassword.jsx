@@ -7,15 +7,19 @@ export default function ChangePassword() {
   const [confirmpass,setConfirmpass] = useState("");
 
   const submit = async () => {
-    await api.put("/user/changepassword", {
-      oldPassword: oldPass,
-      newPassword: newPass,
-      confirmnewPass:confirmpass
-    });
-    alert("Password updated");
-    setOldPass("")
-    setNewPass("")
-    setConfirmpass("")
+    try {
+      await api.put("/user/changepassword", {
+        oldPassword: oldPass,
+        newPassword: newPass,
+        confirmnewPass:confirmpass
+      });
+      alert("Password updated");
+      setOldPass("")
+      setNewPass("")
+      setConfirmpass("")
+    } catch (error) {
+      alert(error.response?.data?.message || "Failed to change password")
+    }
   };
 
   return (
